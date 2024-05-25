@@ -74,7 +74,7 @@ def text_synthesis(language, gender, sample_text, vocoder, MAX_WAV_VALUE, device
         audio = audio.cpu().numpy().astype('int16')
         return audio
 
-def split_into_chunks(text, words_per_chunk=1500):
+def split_into_chunks(text, words_per_chunk=500):
     words = text.split()
     chunks = [words[i:i + words_per_chunk] for i in range(0, len(words), words_per_chunk)]
     return [' '.join(chunk) for chunk in chunks]

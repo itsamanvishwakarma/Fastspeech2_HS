@@ -1,132 +1,119 @@
+accum_grad: 8
+allow_variable_data_keys: false
+batch_bins: 3000000
+batch_size: 20
+batch_type: numel
+best_model_criterion:
+- - valid
+  - loss
+  - min
+- - train
+  - loss
+  - min
+bpemodel: null
+chunk_length: 500
+chunk_shift_ratio: 0.5
+cleaner: null
+collect_stats: false
 config: conf/tuning/train_fastspeech2.yaml
-print_config: false
-log_level: INFO
-dry_run: false
-iterator_type: sequence
-output_dir: exp/tts_train_fastspeech2_raw_char_None
-ngpu: 1
-seed: 0
-num_workers: 1
-num_att_plot: 3
-dist_backend: nccl
-dist_init_method: env://
-dist_world_size: 4
-dist_rank: 0
-local_rank: 0
-dist_master_addr: localhost
-dist_master_port: 49769
-dist_launcher: null
-multiprocessing_distributed: true
-unused_parameters: false
-sharded_ddp: false
-cudnn_enabled: true
 cudnn_benchmark: false
 cudnn_deterministic: true
-collect_stats: false
-write_collected_feats: false
-max_epoch: 1000
-patience: null
-val_scheduler_criterion:
-- valid
-- loss
+cudnn_enabled: true
+detect_anomaly: false
+dist_backend: nccl
+dist_init_method: env://
+dist_launcher: null
+dist_master_addr: localhost
+dist_master_port: 49769
+dist_rank: 0
+dist_world_size: 4
+distributed: true
+dry_run: false
 early_stopping_criterion:
 - valid
 - loss
 - min
-best_model_criterion:
--   - valid
-    - loss
-    - min
--   - train
-    - loss
-    - min
-keep_nbest_models: 5
-grad_clip: 1.0
-grad_clip_type: 2.0
-grad_noise: false
-accum_grad: 8
-no_forward_run: false
-resume: true
-train_dtype: float32
-use_amp: false
-log_interval: null
-use_tensorboard: true
-use_wandb: false
-wandb_project: null
-wandb_id: null
-wandb_entity: null
-wandb_name: null
-wandb_model_log_interval: -1
-detect_anomaly: false
-pretrain_path: null
-init_param: []
-ignore_init_mismatch: false
-freeze_param: []
-num_iters_per_epoch: 800
-batch_size: 20
-valid_batch_size: null
-batch_bins: 3000000
-valid_batch_bins: null
-train_shape_file:
-- exp/tts_stats_raw_char_None/train/text_shape.char
-- exp/tts_stats_raw_char_None/train/speech_shape
-valid_shape_file:
-- exp/tts_stats_raw_char_None/valid/text_shape.char
-- exp/tts_stats_raw_char_None/valid/speech_shape
-batch_type: numel
-valid_batch_type: null
+energy_extract: energy
+energy_extract_conf:
+  fs: 22050
+  hop_length: 256
+  n_fft: 1024
+  reduction_factor: 1
+  win_length: 1024
+energy_normalize: global_mvn
+energy_normalize_conf:
+  stats_file: /home/aman/Developer/Fastspeech2_HS/hindi/male/model/energy_stats.npz
+feats_extract: fbank
+feats_extract_conf:
+  fmax: 8000
+  fmin: 0
+  fs: 22050
+  hop_length: 256
+  n_fft: 1024
+  n_mels: 80
+  win_length: 1024
 fold_length:
 - 150
 - 204800
-sort_in_batch: descending
-sort_batch: descending
-multiple_iterator: false
-chunk_length: 500
-chunk_shift_ratio: 0.5
-num_cache_chunks: 1024
-train_data_path_and_name_and_type:
--   - dump/raw/tr_no_dev/text
-    - text
-    - text
--   - duration_info/tr_no_dev/durations
-    - durations
-    - text_int
--   - dump/raw/tr_no_dev/wav.scp
-    - speech
-    - sound
--   - exp/tts_stats_raw_char_None/train/collect_feats/pitch.scp
-    - pitch
-    - npy
--   - exp/tts_stats_raw_char_None/train/collect_feats/energy.scp
-    - energy
-    - npy
-valid_data_path_and_name_and_type:
--   - dump/raw/dev/text
-    - text
-    - text
--   - duration_info/dev/durations
-    - durations
-    - text_int
--   - dump/raw/dev/wav.scp
-    - speech
-    - sound
--   - exp/tts_stats_raw_char_None/valid/collect_feats/pitch.scp
-    - pitch
-    - npy
--   - exp/tts_stats_raw_char_None/valid/collect_feats/energy.scp
-    - energy
-    - npy
-allow_variable_data_keys: false
-max_cache_size: 0.0
+freeze_param: []
+g2p: g2p_en_no_space
+grad_clip: 1.0
+grad_clip_type: 2.0
+grad_noise: false
+ignore_init_mismatch: false
+init_param: []
+iterator_type: sequence
+keep_nbest_models: 5
+local_rank: 0
+log_interval: null
+log_level: INFO
 max_cache_fd: 32
-valid_max_cache_size: null
+max_cache_size: 0.0
+max_epoch: 1000
+model_conf: {}
+multiple_iterator: false
+multiprocessing_distributed: true
+ngpu: 1
+no_forward_run: false
+non_linguistic_symbols: null
+normalize: global_mvn
+normalize_conf:
+  stats_file: /home/aman/Developer/Fastspeech2_HS/hindi/male/model/feats_stats.npz
+num_att_plot: 3
+num_cache_chunks: 1024
+num_iters_per_epoch: 800
+num_workers: 1
+odim: null
 optim: adam
 optim_conf:
-    lr: 1.0
+  lr: 1.0
+output_dir: exp/tts_train_fastspeech2_raw_char_None
+patience: null
+pitch_extract: dio
+pitch_extract_conf:
+  f0max: 220
+  f0min: 40
+  fs: 22050
+  hop_length: 256
+  n_fft: 1024
+  reduction_factor: 1
+pitch_normalize: global_mvn
+pitch_normalize_conf:
+  stats_file: /home/aman/Developer/Fastspeech2_HS/hindi/male/model/pitch_stats.npz
+pretrain_path: null
+print_config: false
+required:
+- output_dir
+- token_list
+resume: true
 scheduler: noamlr
 scheduler_conf:
-    model_size: 384
-    warmup_steps: 4000
+  model_size: 384
+  warmup_steps: 4000
+seed: 0
+sharded_ddp: false
+sort_batch: descending
+sort_in_batch: descending
 token_list:
 - <blank>
 - <unk>
@@ -152,133 +139,146 @@ token_list:
 - d
 - b
 - w
-- ऐ
+- "\u0910"
 - g
 - $
 - .
 - j
 - c
-- ट
-- थ
-- श
+- "\u091F"
+- "\u0925"
+- "\u0936"
 - U
 - B
-- औ
-- ख
-- ड
+- "\u0914"
+- "\u0916"
+- "\u0921"
 - z
-- ध
+- "\u0927"
 - D
 - f
 - C
-- ष
+- "\u0937"
 - M
-- ण
-- ठ
-- घ
+- "\u0923"
+- "\u0920"
+- "\u0918"
 - J
-- ऑ
-- क
+- "\u0911"
+- "\u0915"
 - P
 - R
 - T
 - K
-- ढ
+- "\u0922"
 - G
-- ञ
+- "\u091E"
 - H
-- ङ
+- "\u0919"
 - Y
-- ऍ
-- र
+- "\u090D"
+- "\u0930"
 - <sos/eos>
-odim: null
-model_conf: {}
-use_preprocessor: true
 token_type: char
-bpemodel: null
-non_linguistic_symbols: null
-cleaner: null
-g2p: g2p_en_no_space
-feats_extract: fbank
-feats_extract_conf:
-    n_fft: 1024
-    hop_length: 256
-    win_length: 1024
-    fs: 22050
-    fmin: 0
-    fmax: 8000
-    n_mels: 80
-normalize: global_mvn
-normalize_conf:
-    stats_file: /speech/arun/released_models/tts/male/hindi/fastspeech2_hs/feats_stats.npz
+train_data_path_and_name_and_type:
+- - dump/raw/tr_no_dev/text
+  - text
+  - text
+- - duration_info/tr_no_dev/durations
+  - durations
+  - text_int
+- - dump/raw/tr_no_dev/wav.scp
+  - speech
+  - sound
+- - exp/tts_stats_raw_char_None/train/collect_feats/pitch.scp
+  - pitch
+  - npy
+- - exp/tts_stats_raw_char_None/train/collect_feats/energy.scp
+  - energy
+  - npy
+train_dtype: float32
+train_shape_file:
+- exp/tts_stats_raw_char_None/train/text_shape.char
+- exp/tts_stats_raw_char_None/train/speech_shape
 tts: fastspeech2
 tts_conf:
-    adim: 384
-    aheads: 2
-    elayers: 4
-    eunits: 1536
-    dlayers: 4
-    dunits: 1536
-    positionwise_layer_type: conv1d
-    positionwise_conv_kernel_size: 3
-    duration_predictor_layers: 2
-    duration_predictor_chans: 256
-    duration_predictor_kernel_size: 3
-    postnet_layers: 5
-    postnet_filts: 5
-    postnet_chans: 256
-    use_masking: true
-    use_scaled_pos_enc: true
-    encoder_normalize_before: true
-    decoder_normalize_before: true
-    reduction_factor: 1
-    init_type: xavier_uniform
-    init_enc_alpha: 1.0
-    init_dec_alpha: 1.0
-    transformer_enc_dropout_rate: 0.2
-    transformer_enc_positional_dropout_rate: 0.2
-    transformer_enc_attn_dropout_rate: 0.2
-    transformer_dec_dropout_rate: 0.2
-    transformer_dec_positional_dropout_rate: 0.2
-    transformer_dec_attn_dropout_rate: 0.2
-    pitch_predictor_layers: 5
-    pitch_predictor_chans: 256
-    pitch_predictor_kernel_size: 5
-    pitch_predictor_dropout: 0.5
-    pitch_embed_kernel_size: 1
-    pitch_embed_dropout: 0.0
-    stop_gradient_from_pitch_predictor: true
-    energy_predictor_layers: 2
-    energy_predictor_chans: 256
-    energy_predictor_kernel_size: 3
-    energy_predictor_dropout: 0.5
-    energy_embed_kernel_size: 1
-    energy_embed_dropout: 0.0
-    stop_gradient_from_energy_predictor: false
-pitch_extract: dio
-pitch_extract_conf:
-    fs: 22050
-    n_fft: 1024
-    hop_length: 256
-    f0max: 220
-    f0min: 40
-    reduction_factor: 1
-pitch_normalize: global_mvn
-pitch_normalize_conf:
-    stats_file: /speech/arun/released_models/tts/male/hindi/fastspeech2_hs/pitch_stats.npz
-energy_extract: energy
-energy_extract_conf:
-    fs: 22050
-    n_fft: 1024
-    hop_length: 256
-    win_length: 1024
-    reduction_factor: 1
-energy_normalize: global_mvn
-energy_normalize_conf:
-    stats_file: /speech/arun/released_models/tts/male/hindi/fastspeech2_hs/energy_stats.npz
-required:
-- output_dir
-- token_list
+  adim: 384
+  aheads: 2
+  decoder_normalize_before: true
+  dlayers: 4
+  dunits: 1536
+  duration_predictor_chans: 256
+  duration_predictor_kernel_size: 3
+  duration_predictor_layers: 2
+  elayers: 4
+  encoder_normalize_before: true
+  energy_embed_dropout: 0.0
+  energy_embed_kernel_size: 1
+  energy_predictor_chans: 256
+  energy_predictor_dropout: 0.5
+  energy_predictor_kernel_size: 3
+  energy_predictor_layers: 2
+  eunits: 1536
+  init_dec_alpha: 1.0
+  init_enc_alpha: 1.0
+  init_type: xavier_uniform
+  pitch_embed_dropout: 0.0
+  pitch_embed_kernel_size: 1
+  pitch_predictor_chans: 256
+  pitch_predictor_dropout: 0.5
+  pitch_predictor_kernel_size: 5
+  pitch_predictor_layers: 5
+  positionwise_conv_kernel_size: 3
+  positionwise_layer_type: conv1d
+  postnet_chans: 256
+  postnet_filts: 5
+  postnet_layers: 5
+  reduction_factor: 1
+  stop_gradient_from_energy_predictor: false
+  stop_gradient_from_pitch_predictor: true
+  transformer_dec_attn_dropout_rate: 0.2
+  transformer_dec_dropout_rate: 0.2
+  transformer_dec_positional_dropout_rate: 0.2
+  transformer_enc_attn_dropout_rate: 0.2
+  transformer_enc_dropout_rate: 0.2
+  transformer_enc_positional_dropout_rate: 0.2
+  use_masking: true
+  use_scaled_pos_enc: true
+unused_parameters: false
+use_amp: false
+use_preprocessor: true
+use_tensorboard: true
+use_wandb: false
+val_scheduler_criterion:
+- valid
+- loss
+valid_batch_bins: null
+valid_batch_size: null
+valid_batch_type: null
+valid_data_path_and_name_and_type:
+- - dump/raw/dev/text
+  - text
+  - text
+- - duration_info/dev/durations
+  - durations
+  - text_int
+- - dump/raw/dev/wav.scp
+  - speech
+  - sound
+- - exp/tts_stats_raw_char_None/valid/collect_feats/pitch.scp
+  - pitch
+  - npy
+- - exp/tts_stats_raw_char_None/valid/collect_feats/energy.scp
+  - energy
+  - npy
+valid_max_cache_size: null
+valid_shape_file:
+- exp/tts_stats_raw_char_None/valid/text_shape.char
+- exp/tts_stats_raw_char_None/valid/speech_shape
 version: 0.10.3a3
-distributed: true
+wandb_entity: null
+wandb_id: null
+wandb_model_log_interval: -1
+wandb_name: null
+wandb_project: null
+write_collected_feats: false
